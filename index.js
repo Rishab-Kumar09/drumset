@@ -87,12 +87,13 @@ function buttonSound(key){
             break;
     }
 }
-
+// for clicking
 var totaldrums = document.querySelectorAll(".drum").length;
 for (var i=0;i<totaldrums;i++){
         document.querySelectorAll(".drum")[i].addEventListener("click",function(){
             var buttonname = this.innerHTML;
             buttonSound(buttonname);
+            buttonPressed(buttonname);
         });
 }
 
@@ -111,8 +112,29 @@ for (var i=0;i<totaldrums;i++){
     example - if we press key 'w', the key property will give us the output as 'w'.
     Let us console log and check first.
 */
+
+// for key pressing
 document.addEventListener("keydown", function(event){
-    // console.log(event.key);
+    // console.log(event.key); //Note that word 'event' can be replaced by any variable. 
     // instead of whole event, it only gives values like w,a,s,d etc. so we can now use switch statement function here also.
     buttonSound(event.key);
+    buttonPressed(event.key);
 });
+
+
+
+
+
+function buttonPressed(keypress){
+    var currentbutton = document.querySelector("."+keypress);
+    currentbutton.classList.add("pressed");
+
+    setTimeout(function(){
+        currentbutton.classList.remove("pressed");
+    }, 100);
+
+    /* setTimeout is an inbuilt function. here we are using it to remove depressed class after some time.
+       its syntax is - setTimeout(function(){function code}, amount_of_time, arguements(if any));
+       in the above code, our depredded class is removed after 0.1 second.
+    */
+}
